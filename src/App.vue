@@ -1,26 +1,37 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+    
+    
+    <div class="grid">
+      <my-left-side/>
+      <my-right-side/>
+    </div>
+
+    <my-footer/>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import MyFooter from './components/MyFooter.vue'
+import MyLeftSide from './components/MyLeftSide.vue'
+import MyRightSide from './components/MyRightSide.vue'
+
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+  components: {MyFooter, MyLeftSide ,MyRightSide},
+
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 93vh;
 }
 </style>
