@@ -4,7 +4,7 @@
         <img src="../assets/icon.png" class="img"/>
         <div class="task ml-auto mr-3">
           <button class="btn btn-dark mt-3 " data-toggle="modal" data-target="#exampleModal">
-            ajouter une tache
+            Ajouter une tache
           </button>
         </div>
      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -35,10 +35,10 @@
                   <label for="d">durée :</label>
                   <input type="number"  v-model="payload.duree" class="form-control" id="d"  placeholder="la durée">
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="d">nombre de ressources :</label>
                   <input type="number" class="form-control" id="d" v-model="payload.nbr" placeholder="nombre">
-                </div>
+                </div> -->
 
              <button type="button" class="btn btn-purple container" @click="addTask">Submit</button>
            </form>
@@ -52,16 +52,19 @@
            <h6>
              Type de diagramme
            </h6>
-           <select class="form-control " >
-              <option value="">
+           <select class="form-control " v-model="type" >
+              <option value="-1">
+                choisissez un diagramme
+              </option>
+              <option value="0">
                  diagramme de pert
               </option>
-                <option value="">
+                <option value="1">
                  diagramme de gantt
               </option>
            </select>
        </div>
-       <button class="btn btn-purple mt-3 ">
+       <button class="btn btn-purple mt-3 " @click="run">
           Run >>
        </button>
      </div>
@@ -82,6 +85,10 @@ export default {
         this.payload.nom = ""
          this.payload.duree =1
         this.payload.nbr =0
+      },
+      run(){
+        console.log("run");
+         this.$store.commit('changeType',this.type)
       }
 
     },
@@ -95,12 +102,13 @@ export default {
     },
     data(){
       return{
+          type:this.$store.state.type,
           payload:{
             nom:"",
             anteriorete:[],
             duree:1,
             nbr:0,
-
+           
           },
           
       }

@@ -3,10 +3,10 @@
         <table class=" table-striped table  ">
             <thead class="thead-purple ">
               <tr >
-                <th scope="col">Nom de tache</th>
-                <th scope="col">Antériorité</th>
-                <th scope="col">Durée</th>
-                <th scope="col" width="25%">Nombre ressources</th>
+                <th scope="col" width="17%">Nom de tache</th>
+                <th scope="col" width="37%">Antériorité</th>
+                <th scope="col" width="17%">Durée</th>
+                <!-- <th scope="col" width="25%">Nombre ressources</th> -->
                 <th scope="col"  width="17%" >action</th>
               </tr>
             </thead>
@@ -21,7 +21,7 @@
                    {{n.anteriorete}}
                 </td>
                 <td>{{n.duree}}</td>
-                <td>{{n.nbr}}</td>
+                <!-- <td>{{n.nbr}}</td> -->
                 <td>
                   <button class="btn btn-danger" @click="deleteTask(n.id)"> <i class="bi bi-trash3"></i> </button>
                 </td>
@@ -54,7 +54,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
 .thead-purple{
   background-color: rgb(78, 29, 124);
   color: white;
