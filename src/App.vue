@@ -32,6 +32,6 @@ body {
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 93vh;
+  height: 93.5vh;
 }
 </style>
