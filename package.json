@@ -11,6 +11,7 @@
     "core-js": "^3.8.3",
     "cytoscape": "^3.23.0",
     "cytoscape-html-node": "^2.2.0",
+    "cytoscape-node-html-label": "^1.2.2",
     "vue": "^3.2.13",
     "vuex": "^4.0.2"
   },

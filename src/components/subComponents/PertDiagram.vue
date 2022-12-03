@@ -51,12 +51,13 @@ mounted(){
         container: document.getElementById('cy'),
         elements: [
         // nodes
-  { data: { id: 'a' , content : "DTO :[0,20] \n DTA :[0,20]" } },
-  { data: { id: 'b' } },
-  { data: { id: 'c' } },
-  { data: { id: 'd' } },
-  { data: { id: 'e' } },
-  { data: { id: 'f' } },
+  { data: { id: 'a' , label : "A \n\n  DTO : [0,20] \n DTA : [0,20]" } },
+    { data: { id: 'c' , label : "C \n\n  DTO : [0,20] \n DTA : [0,20]"} },
+  { data: { id: 'd' , label : "D \n\n  DTO : [0,20] \n DTA :[0,20]"} },
+
+  { data: { id: 'b' , label : "B \n\n  DTO : [0,20] \n DTA : [0,20]"} },
+  { data: { id: 'e' , label : "E \n\n  DTO : [0,20] \n DTA : [0,20]"} },
+  { data: { id: 'f' , label : "F \n\n  DTO : [0,20] \n DTA : [0,20]"} },
   // edges
   {
     data: {
@@ -100,26 +101,24 @@ mounted(){
             style: {
                 shape: 'rectangle',
                 'background-color': 'purple',
-                height:"53rem",
-                width:"53rem",
-            label: 'data(id)',
-          
-
-            },
-          
+            label: 'data(label)',
+            "text-valign" : "center",
+            "text-wrap" : "wrap",
+            width:"67rem",
+            height:"63rem",
+            "font-size":"10rem",
+            color:"white"
+            }
         },
-        {
 
+         {
              
             selector: 'edge',
             style: {
                 "target-arrow-shape": "triangle",
              "curve-style": "bezier",
-
             }
         }
-        
-        
         
         ]  
       });
