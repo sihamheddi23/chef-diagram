@@ -87,8 +87,8 @@ export default {
         this.payload.nbr =0
       },
       run(){
-        console.log("run");
-         this.$store.commit('changeType',this.type)
+      
+         this.$store.commit('run',this.type)
       }
 
     },

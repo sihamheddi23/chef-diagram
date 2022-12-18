@@ -10,7 +10,11 @@
    
    
      <div class="info mx-4 mt-3">
-        <h6 class="text-danger text-center pt-4">Le chemin critique est : ---------</h6>
+        <div class="d-flex justify-content-center pt-4">
+       
+           <h6 class="text-danger mr-3">Le chemin critique est : ---------</h6>
+           <h6>La durée de projet : </h6>
+        </div>
         <table class="table mx-3 mt-3">
 
                 <tbody>
@@ -45,56 +49,30 @@ import cytoscape from "cytoscape";
 
 export default {
     
-
+ data(){
+    return {
+      tasks:this.$store.state.tasks
+    }
+ },
 mounted(){
+      let elements = []
+      this.tasks.forEach(e=>{
+        elements.push({
+          data:{id:e.nom,label:e.nom+" \n\n  DTO : [0,20] \n DTA : [0,20]"}
+        })
+        if(e.anteriorete.indexOf("-")==-1)
+            e.anteriorete.forEach(a=>{
+               elements.push({
+                   data:{  id: a+e.nom,
+                      source: a,
+                      target:e.nom
+                    }
+                })
+            })
+      })
      let cy = cytoscape({
         container: document.getElementById('cy'),
-        elements: [
-        // nodes
-  { data: { id: 'a' , label : "A \n\n  DTO : [0,20] \n DTA : [0,20]" } },
-    { data: { id: 'c' , label : "C \n\n  DTO : [0,20] \n DTA : [0,20]"} },
-  { data: { id: 'd' , label : "D \n\n  DTO : [0,20] \n DTA :[0,20]"} },
-
-  { data: { id: 'b' , label : "B \n\n  DTO : [0,20] \n DTA : [0,20]"} },
-  { data: { id: 'e' , label : "E \n\n  DTO : [0,20] \n DTA : [0,20]"} },
-  { data: { id: 'f' , label : "F \n\n  DTO : [0,20] \n DTA : [0,20]"} },
-  // edges
-  {
-    data: {
-      id: 'ab',
-      source: 'a',
-      target: 'b'
-    }
-  },
-  {
-    data: {
-      id: 'cd',
-      source: 'c',
-      target: 'd'
-    }
-  },
-  {
-    data: {
-      id: 'ef',
-      source: 'e',
-      target: 'f'
-    }
-  },
-  {
-    data: {
-      id: 'ac',
-      source: 'a',
-      target: 'c'
-    }
-  },
-  {
-    data: {
-      id: 'be',
-      source: 'b',
-      target: 'e'
-    }
-  }
-],
+        elements: elements,
     style: [
         {
             selector: 'node',

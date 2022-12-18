@@ -13,8 +13,9 @@ export const  store = createStore({
         const id =  state.tasks.length
         state.tasks.push({id:id,...paylod})
      },
-     changeType(state,payload){
+     run(state,payload){
        state.type = payload
+       
      },
      deleteTask(state,id){
         console.log("delete task 3");

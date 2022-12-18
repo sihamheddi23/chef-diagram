@@ -1,8 +1,8 @@
 <template>
   <div class="right">
 
-     <PertDiagram v-if="type == 0"/>
-     <GanttDiagram v-else-if="type == 1"/>
+     <PertDiagram v-if="type == 0 && isEmpty"/>
+     <GanttDiagram v-else-if="type == 1 && isEmpty"/>
      <div v-else class="d-flex justify-content-center align-items-center h-50 text-secondary">
         <p>Ajouter des taches et indiquer le type de diagramme pour l'afficher ici</p>
      </div>
@@ -19,6 +19,9 @@ export default {
  computed: {
     type(){
       return this.$store.state.type
+    },
+    isEmpty(){
+      return this.$store.state.tasks.length>0
     }
  }
 }
