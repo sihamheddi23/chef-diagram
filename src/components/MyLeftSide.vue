@@ -108,6 +108,11 @@ export default {
             anteriorete:[],
             duree:1,
             nbr:0,
+            dta:[],
+            dto:[],
+            ordered:false,
+            level:0,
+          
            
           },
           

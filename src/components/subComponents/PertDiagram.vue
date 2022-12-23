@@ -63,7 +63,8 @@ mounted(){
         if(e.anteriorete.indexOf("-")==-1)
             e.anteriorete.forEach(a=>{
                elements.push({
-                   data:{  id: a+e.nom,
+                   data:{  
+                      id: a+e.nom,
                       source: a,
                       target:e.nom
                     }
