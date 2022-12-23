@@ -1,11 +1,13 @@
 function graphLevel(tasks){
-   
-    let ans = true
+ 
+    let ans = true,a=true
     let sansPred = []
     let t = []
     let level = 0
     let pos = -1
-    while(level<2){
+    let ant = []
+
+    while(ans){
      
        t = tasks.filter(ts=>ts.ordered==false)
   
@@ -14,35 +16,61 @@ function graphLevel(tasks){
        }
        else{
        
-        sansPred = tasks.filter(ts=> ts.anteriorete.indexOf("-")>0).map(ts=> ts.id)
+            sansPred = t.filter(ts=> ts.anteriorete.indexOf("-")>=0).map(ts=> ts.id)
         
-        tasks.forEach(ts => {
-          // change level of sanpred task
-          if (sansPred.indexOf(ts.id)>0) {
-            console.log("hi I'm ",ts,"\n\n");
-            ts.ordered=true
-            ts.level =level
-          }else{
+            tasks.forEach((ts,index) => {
+              // change level of sanpred task
+             
+              if (sansPred.indexOf(ts.id)>=0) {
             
-            // remove sanPred task from list of anteriorete tasks
-            for (let i = 0; i < sansPred.length; i++) {
-              pos = ts.anteriorete.indexOf(sansPred[i])
-              if(pos>0) ts.anteriorete.splice(pos,1)
+                ts.ordered=true
+                ts.level =level
               
-            }
-          
-            if (ts.anteriorete.length == 0) {
-              ts.anteriorete.push("-")
-            }
-  
-  
-          } 
-       });
-  
-       level+=1
+              
+              }else{
+                
+                // remove sanPred task from list of anteriorete tasks
+                for (let i = 0; i < sansPred.length; i++) {
+                  pos = ts.anteriorete.indexOf(sansPred[i])
+                  if(pos>=0) {
+                    if(a)  {
+                      ant.push({[index]:ts.anteriorete})
+                      a=false
+                    }
+                    ts.anteriorete.splice(pos,1)
+                  }
+                  
+                }
+                a=true
+              
+                if (ts.anteriorete.length == 0) {
+                  ts.anteriorete.push("-")
+                }
+      
+      
+              } 
+          });
+          console.log(ant);
+      
+          level+=1
        }
     }
-  
+
+    // tasks.forEach(ts => {
+    //    tsk.forEach(task => {
+        
+    //         if(ts.id == task.id){
+              
+    //             ts.anteriorete = task.anteriorete
+
+    //         }
+      
+    //   })
+    // })
+
+
+    
+    console.log("hi I'm ",tasks);
     return tasks
   
   }
@@ -53,7 +81,7 @@ function graphLevel(tasks){
               nom:"a",
               anteriorete:["-"],
               duree:1,
-              nbr:0,
+                
               dta:[],
               dto:[],
               ordered:false,
@@ -65,7 +93,7 @@ function graphLevel(tasks){
               nom:"b",
               anteriorete:["a"],
               duree:1,
-              nbr:0,
+                
               dta:[],
               dto:[],
               ordered:false,
@@ -77,7 +105,7 @@ function graphLevel(tasks){
               nom:"c",
               anteriorete:["a"],
               duree:1,
-              nbr:0,
+                
               dta:[],
               dto:[],
               ordered:false,
@@ -89,7 +117,7 @@ function graphLevel(tasks){
               nom:"d",
               anteriorete:["a","b"],
               duree:1,
-              nbr:0,
+                
               dta:[],
               dto:[],
               ordered:false,
@@ -101,7 +129,7 @@ function graphLevel(tasks){
               nom:"e",
               anteriorete:["-"],
               duree:1,
-              nbr:0,
+                
               dta:[],
               dto:[],
               ordered:false,
@@ -113,7 +141,7 @@ function graphLevel(tasks){
               nom:"k",
               anteriorete:["e"],
               duree:1,
-              nbr:0,
+                
               dta:[],
               dto:[],
               ordered:false,
@@ -125,7 +153,7 @@ function graphLevel(tasks){
               nom:"l",
               anteriorete:["k"],
               duree:1,
-              nbr:0,
+                
               dta:[],
               dto:[],
               ordered:false,
@@ -137,7 +165,7 @@ function graphLevel(tasks){
               nom:"m",
               anteriorete:["l"],
               duree:1,
-              nbr:0,
+                
               dta:[],
               dto:[],
               ordered:false,
@@ -147,5 +175,4 @@ function graphLevel(tasks){
      },
       
   ]
-  
-  console.log(graphLevel(tasks))
+graphLevel(tasks)
