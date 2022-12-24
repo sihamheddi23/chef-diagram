@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { graphLevel } from "../helperFunctions/index";
+import { dateAuPlusTot, graphLevel } from "../helperFunctions/index";
  
 
 
@@ -18,10 +18,11 @@ export const  store = createStore({
         const id =  state.tasks.length
         state.tasks.push({id:id,...paylod})
      },
-    async run(state,payload){
+     run(state,payload){
       let y = [...state.tasks]
-      console.log(y);
-      console.log(await graphLevel(y));
+     
+       graphLevel(y)
+      dateAuPlusTot(y)
      // console.log( state.tasks);
        state.type = payload
        

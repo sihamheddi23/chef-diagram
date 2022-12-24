@@ -78,6 +78,22 @@ export function graphLevel(tasks){
   
   }
   
+
+export function dateAuPlusTot(tasks){
+  let pred = []
+  tasks.forEach(task=>{
+    if (task.level == 0) {
+      task.dto = [0,task.duree]
+    } else {
+      for (let i = 0; i < task.anteriorete.length; i++) {
+         pred = tasks.filter(t=>t.nom== task.anteriorete[i]).map(e=>e.dto[1])
+         task.dto = [Math.max(...pred),Math.max(...pred)+task.duree]
+        
+      } 
+    }
+  })
+}
+
 /*   let tasks = [
       
       {       id:"a",     

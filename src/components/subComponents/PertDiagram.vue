@@ -80,7 +80,7 @@ mounted(){
 
       this.tasks.forEach(e=>{
         elements.push({
-          data:{id:e.nom,label:e.nom+" \n\n  DTO : [0,20] \n DTA : [0,20]"}
+          data:{id:e.nom,label:e.nom+" \n\n  DTO : ["+e.dto+"] \n DTA : [0,20]"}
         })
         
    
