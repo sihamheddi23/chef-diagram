@@ -1,11 +1,18 @@
-function graphLevel(tasks){
- 
-    let ans = true,a=true
+export function graphLevel(tasks){
+   
+    let ans = true
     let sansPred = []
     let t = []
     let level = 0
     let pos = -1
     let ant = []
+    
+    tasks.forEach((task)=>{
+
+      ant.push([...task.anteriorete])
+ 
+    })
+
 
     while(ans){
      
@@ -16,32 +23,31 @@ function graphLevel(tasks){
        }
        else{
        
-            sansPred = t.filter(ts=> ts.anteriorete.indexOf("-")>=0).map(ts=> ts.id)
+            sansPred = t.filter(ts=> ts.anteriorete.indexOf("-")>=0).map(ts=> ts.nom)
         
-            tasks.forEach((ts,index) => {
+            tasks.forEach((ts) => {
               // change level of sanpred task
              
-              if (sansPred.indexOf(ts.id)>=0) {
+              if (sansPred.indexOf(ts.nom)>=0) {
             
                 ts.ordered=true
                 ts.level =level
               
               
               }else{
-                
+             
                 // remove sanPred task from list of anteriorete tasks
                 for (let i = 0; i < sansPred.length; i++) {
                   pos = ts.anteriorete.indexOf(sansPred[i])
-                  if(pos>=0) {
-                    if(a)  {
-                      ant.push({[index]:ts.anteriorete})
-                      a=false
-                    }
+                 
+                    if(pos>=0) {
+                   
                     ts.anteriorete.splice(pos,1)
                   }
                   
                 }
-                a=true
+          
+            
               
                 if (ts.anteriorete.length == 0) {
                   ts.anteriorete.push("-")
@@ -50,32 +56,29 @@ function graphLevel(tasks){
       
               } 
           });
-          console.log(ant);
       
           level+=1
        }
     }
 
-    // tasks.forEach(ts => {
-    //    tsk.forEach(task => {
-        
-    //         if(ts.id == task.id){
-              
-    //             ts.anteriorete = task.anteriorete
+    tasks.forEach((task,index)=>{
 
-    //         }
-      
-    //   })
-    // })
-
+      task.anteriorete=ant[index]
+ 
+    })
+   
+    tasks.sort((a,b)=>{
+      if(a.level > b.level) return 1
+      else if(a.level < b.level) return -1
+      else return 0
+    })
 
     
-    console.log("hi I'm ",tasks);
     return tasks
   
   }
   
-  let tasks = [
+/*   let tasks = [
       
       {       id:"a",     
               nom:"a",
@@ -174,5 +177,5 @@ function graphLevel(tasks){
              
      },
       
-  ]
-graphLevel(tasks)
+  ] */
+//console.log(graphLevel(tasks));

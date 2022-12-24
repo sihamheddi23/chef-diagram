@@ -56,22 +56,63 @@ export default {
  },
 mounted(){
       let elements = []
+       
+       elements.push({
+            data:{id:"Debut",label:" debut \n\n [0,0]"}
+        })
+       
+       elements.push({
+            data:{id:"Fin",label:" fin \n\n [0,0]"}
+        })
+       
+       let maxLevel = this.tasks[this.tasks.length-1].level
+       let tsk = this.tasks.filter(t=>t.level==maxLevel)
+       
+       tsk.forEach((e)=>{
+               elements.push({
+                        data:{  
+                            id: "Fin"+e.nom,
+                            source:e.nom ,
+                            target:"Fin"
+                            }
+                        })
+       })
+
       this.tasks.forEach(e=>{
         elements.push({
           data:{id:e.nom,label:e.nom+" \n\n  DTO : [0,20] \n DTA : [0,20]"}
         })
+        
+   
         if(e.anteriorete.indexOf("-")==-1)
-            e.anteriorete.forEach(a=>{
-               elements.push({
-                   data:{  
-                      id: a+e.nom,
-                      source: a,
-                      target:e.nom
-                    }
-                })
-            })
+           {
+                e.anteriorete.forEach(a=>{
+                    elements.push({
+                        data:{  
+                            id: a+e.nom,
+                            source: a,
+                            target:e.nom
+                            }
+                        })
+                  })
+            
+           } 
+        else {
+               
+                    elements.push({
+                        data:{  
+                            id: "Debut"+e.nom,
+                            source: "Debut",
+                            target:e.nom
+                            }
+                        })
+               
+        }
       })
      let cy = cytoscape({
+        
+     
+         userZoomingEnabled: true,
         container: document.getElementById('cy'),
         elements: elements,
     style: [
@@ -87,6 +128,7 @@ mounted(){
             height:"63rem",
             "font-size":"10rem",
             color:"white"
+      
             }
         },
 
@@ -102,7 +144,7 @@ mounted(){
         ]  
       });
       cy.layout({
-         name: 'grid'
+         name: 'klay'
         }).run();
 }
 }
