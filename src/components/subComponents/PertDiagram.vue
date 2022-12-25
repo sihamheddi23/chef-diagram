@@ -12,8 +12,8 @@
      <div class="info mx-4 mt-3">
         <div class="d-flex justify-content-center pt-4">
        
-           <h6 class="text-danger mr-3">Le chemin critique est : ---------</h6>
-           <h6>La durée de projet : </h6>
+           <h6 class="text-danger mr-3">Le chemin critique est : {{cheminCritique}}</h6>
+           <h6>La durée de projet : {{duree}}</h6>
         </div>
         <table class="table mx-3 mt-3">
 
@@ -48,7 +48,14 @@
 import cytoscape from "cytoscape";
 
 export default {
-    
+    computed:{
+        duree(){
+            return this.$store.state.duree
+        },
+        cheminCritique(){
+            return this.$store.state.chemin.join("-")
+        }
+    },
  data(){
     return {
       tasks:this.$store.state.tasks
@@ -61,13 +68,16 @@ mounted(){
             data:{id:"Debut",label:" debut \n\n [0,0]"}
         })
        
-       elements.push({
-            data:{id:"Fin",label:" fin \n\n [0,0]"}
-        })
+   
        
        let maxLevel = this.tasks[this.tasks.length-1].level
        let tsk = this.tasks.filter(t=>t.level==maxLevel)
-       
+       let duree = Math.max(...tsk.map(e=>e.dto[1]))
+       this.$store.commit("setDuree",duree)
+
+           elements.push({
+            data:{id:"Fin",label:" fin \n\n ["+duree+","+duree+"]"}
+        })
        tsk.forEach((e)=>{
                elements.push({
                         data:{  
@@ -80,7 +90,7 @@ mounted(){
 
       this.tasks.forEach(e=>{
         elements.push({
-          data:{id:e.nom,label:e.nom+" \n\n  DTO : ["+e.dto+"] \n DTA : [0,20]"}
+          data:{id:e.nom,label:e.nom+" \n\n  DTO : ["+e.dto+"] \n DTA : ["+e.dta+"]"}
         })
         
    

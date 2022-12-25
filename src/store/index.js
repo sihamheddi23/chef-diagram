@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { dateAuPlusTot, graphLevel } from "../helperFunctions/index";
+import { cheminCritique, dateAuPlusTard, dateAuPlusTot, graphLevel } from "../helperFunctions/index";
  
 
 
@@ -10,6 +10,8 @@ export const  store = createStore({
     return {
         type:-1,
         tasks:[],
+        duree:0,
+        chemin:[]
         
     }
   },
@@ -18,11 +20,18 @@ export const  store = createStore({
         const id =  state.tasks.length
         state.tasks.push({id:id,...paylod})
      },
+     setDuree(state,duree){
+         state.duree = duree
+         dateAuPlusTard(  state.tasks, state.duree)
+         state.chemin = cheminCritique(state.tasks)
+     }
+     ,
      run(state,payload){
       let y = [...state.tasks]
      
-       graphLevel(y)
+      graphLevel(y)
       dateAuPlusTot(y)
+     
      // console.log( state.tasks);
        state.type = payload
        

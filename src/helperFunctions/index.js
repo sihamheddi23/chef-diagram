@@ -94,6 +94,36 @@ export function dateAuPlusTot(tasks){
   })
 }
 
+export function dateAuPlusTard(tasks,duree){
+  let maxLevel = tasks[tasks.length-1].level
+  let success = []
+  let min = duree
+   for (let i = tasks.length-1; i > 0; i--) {
+      if (tasks[i].level == maxLevel) {
+        // console.log(duree);
+         tasks[i].dta = [duree-tasks[i].duree,duree]
+      } else {
+        success = tasks.filter(e=>e.anteriorete.indexOf(tasks[i].nom)>=0)
+          if(success.length>0) {
+           min = Math.min(...success.map(e=>e.dta[0]))
+          }   
+         tasks[i].dta = [min-tasks[i].duree,min]
+        
+      }
+      min = duree
+}}
+
+export function cheminCritique(tasks) {
+   let criticalTasks = []
+  tasks.forEach(e => {
+
+      if(e.dta[0]===e.dto[0] && e.dta[1]===e.dto[1]) {
+        criticalTasks.push(e.nom)
+      }
+  })
+  return criticalTasks
+}
+
 /*   let tasks = [
       
       {       id:"a",     
