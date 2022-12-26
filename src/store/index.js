@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { cheminCritique, dateAuPlusTard, dateAuPlusTot, graphLevel } from "../helperFunctions/index";
+import { cheminCritique, dateAuPlusTard, dateAuPlusTot, graphLevel, margeLibreEtTotale } from "../helperFunctions/index";
  
 
 
@@ -24,6 +24,7 @@ export const  store = createStore({
          state.duree = duree
          dateAuPlusTard(  state.tasks, state.duree)
          state.chemin = cheminCritique(state.tasks)
+         margeLibreEtTotale( state.tasks, state.duree)
      }
      ,
      run(state,payload){

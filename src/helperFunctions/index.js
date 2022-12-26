@@ -1,3 +1,5 @@
+
+
 export function graphLevel(tasks){
    
     let ans = true
@@ -94,11 +96,12 @@ export function dateAuPlusTot(tasks){
   })
 }
 
+
 export function dateAuPlusTard(tasks,duree){
   let maxLevel = tasks[tasks.length-1].level
   let success = []
   let min = duree
-   for (let i = tasks.length-1; i > 0; i--) {
+   for (let i = tasks.length-1; i >=0; i--) {
       if (tasks[i].level == maxLevel) {
         // console.log(duree);
          tasks[i].dta = [duree-tasks[i].duree,duree]
@@ -113,6 +116,28 @@ export function dateAuPlusTard(tasks,duree){
       min = duree
 }}
 
+export function margeLibreEtTotale(tasks,duree){
+   let success = [],min = duree
+    tasks.forEach((task)=>{
+
+         task.mt = task.dta[1] - task.dto[1]
+         success = tasks.filter(e=>e.anteriorete.indexOf(task.nom)>=0)
+         if(success.length>0) {
+          min = Math.min(...success.map(e=>e.dto[0]))
+         } 
+
+         task.ml = min-task.dto[1]  
+         min = duree
+
+    })
+
+
+
+}
+
+
+
+
 export function cheminCritique(tasks) {
    let criticalTasks = []
   tasks.forEach(e => {
@@ -123,6 +148,8 @@ export function cheminCritique(tasks) {
   })
   return criticalTasks
 }
+
+
 
 /*   let tasks = [
       

@@ -29,6 +29,6 @@ export default {
 
 <style>
   .right {
-    background-color: #ece1f1bd;
+    background-color: #e7dbec6b;
   }
 </style>

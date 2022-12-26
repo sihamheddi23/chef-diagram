@@ -18,24 +18,18 @@
         <table class="table mx-3 mt-3">
 
                 <tbody>
-                    <tr>
-                    <th scope="row">Marge libre</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
+                      <tr>
+                        <th scope="row">Le Nom Du Tache</th>
+                        <td v-for="t in tasks" :key="t.id">{{t.nom}}</td>
+                
                     </tr>
                     <tr>
-                    <th scope="row">Marge totale
-                    </th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                   <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
+                        <th scope="row">Marge libre</th>
+                            <td v-for="t in tasks" :key="t.id">{{t.ml}}</td>
+                    </tr>
+                    <tr>
+                          <th scope="row">Marge totale</th>
+                           <td v-for="t in tasks" :key="t.id">{{t.mt}}</td>
                     </tr>
 
                 </tbody>
@@ -169,14 +163,14 @@ mounted(){
 
 .diagram {
     width: 100%;
-    height: 60vh;
-    border: 1px solid grey;
+    height: 54vh;
+   /* border: 1px solid grey; */
 
 }
 
 .info {
     background: white;
-      height: 28vh;
+      height: 35vh;
        overflow-y:hidden;
       overflow-x: scroll;
 }
